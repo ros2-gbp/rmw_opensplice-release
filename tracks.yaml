@@ -14,7 +14,7 @@ tracks:
       :{release_inc}
     devel_branch: master
     name: upstream
-    patches: null
+    patches: ros2
     release_inc: -1
     release_repo_url: null
     release_tag: master
