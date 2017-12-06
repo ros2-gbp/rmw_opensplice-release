@@ -69,7 +69,7 @@ add_library(rmw_opensplice_cpp SHARED
   src/rmw_topic_names_and_types.cpp
   src/rmw_trigger_guard_condition.cpp
   src/rmw_wait.cpp
-  src/rmw_waitset.cpp
+  src/rmw_wait_set.cpp
   src/types.cpp
 )
 ament_target_dependencies(rmw_opensplice_cpp
@@ -83,12 +83,10 @@ ament_target_dependencies(rmw_opensplice_cpp
 # On Windows this adds the RMW_BUILDING_DLL definition.
 # On Unix (GCC or Clang) it hides the symbols with -fvisibility=hidden.
 configure_rmw_library(rmw_opensplice_cpp)
-# Additionally, on Windows, add the ROSIDL_TYPESUPPORT_OPENSPLICE_CPP_BUILDING_DLL definition.
+
 if(WIN32)
   target_compile_definitions(rmw_opensplice_cpp
     PRIVATE "_CRT_NONSTDC_NO_DEPRECATE")
-  target_compile_definitions(rmw_opensplice_cpp
-    PRIVATE "ROSIDL_TYPESUPPORT_OPENSPLICE_CPP_BUILDING_DLL")
 endif()
 
 ament_export_libraries(rmw_opensplice_cpp)
