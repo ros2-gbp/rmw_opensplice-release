@@ -1,4 +1,4 @@
-// Copyright 2015 Open Source Robotics Foundation, Inc.
+// Copyright 2014-2017 Open Source Robotics Foundation, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,12 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <rosidl_typesupport_opensplice_cpp/visibility_control.h>
+#include "rmw/rmw.h"
 
-namespace rosidl_typesupport_opensplice_cpp
+extern "C"
 {
-
-ROSIDL_TYPESUPPORT_OPENSPLICE_CPP_EXPORT
-const char * typesupport_identifier = "rosidl_typesupport_opensplice_cpp";
-
-}  // namespace rosidl_typesupport_opensplice_cpp
+// TODO(sriramster): Check support for log level manipulation with opensplice
+rmw_ret_t
+rmw_set_log_severity(rmw_log_severity_t severity)
+{
+  (void)severity;
+  return RMW_RET_OK;
+}
+}  // extern "C"

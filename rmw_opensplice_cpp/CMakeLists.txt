@@ -48,6 +48,7 @@ add_library(rmw_opensplice_cpp SHARED
   src/identifier.cpp
   src/namespace_prefix.cpp
   src/qos.cpp
+  src/rmw_logging.cpp
   src/rmw_client.cpp
   src/rmw_compare_gids_equal.cpp
   src/rmw_count.cpp
@@ -61,6 +62,7 @@ add_library(rmw_opensplice_cpp SHARED
   src/rmw_publisher.cpp
   src/rmw_request.cpp
   src/rmw_response.cpp
+  src/rmw_serialize.cpp
   src/rmw_service.cpp
   src/rmw_service_names_and_types.cpp
   src/rmw_service_server_is_available.cpp
