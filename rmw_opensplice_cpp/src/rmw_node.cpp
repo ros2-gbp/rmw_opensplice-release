@@ -102,7 +102,7 @@ rmw_create_node(
 #ifdef _WIN32
   if (!ros_domain_id) {
     RMW_SET_ERROR_MSG("environment variable ROS_DOMAIN_ID is not set");
-    fprintf(stderr, "[rmw_opensplice_cpp]: error: %s\n", rmw_get_error_string_safe());
+    fprintf(stderr, "[rmw_opensplice_cpp]: error: %s\n", rmw_get_error_string().str);
     return nullptr;
   }
 #endif
@@ -131,11 +131,16 @@ rmw_create_node(
   //   userData not following this policy will be ignored completely.
 
   DDS::DomainParticipantQos dpqos;
-  size_t length = strlen(name) + strlen("name=;") + 1;
+  size_t length = strlen(name) + strlen("name=;") +
+    strlen(namespace_) + strlen("namespace=;") + 1;
   dp_factory->get_default_participant_qos(dpqos);
   dpqos.user_data.value.length(static_cast<DDS::ULong>(length));
-  snprintf(reinterpret_cast<char *>(dpqos.user_data.value.get_buffer(false)), length, "name=%s;",
-    name);
+  int written = snprintf(reinterpret_cast<char *>(dpqos.user_data.value.get_buffer(false)),
+      length, "name=%s;namespace=%s;", name, namespace_);
+  if (written < 0 || written > static_cast<int>(length) - 1) {
+    RMW_SET_ERROR_MSG("failed to populate user_data buffer");
+    return nullptr;
+  }
 
   participant = dp_factory->create_participant(
     domain, dpqos, NULL, DDS::STATUS_MASK_NONE);
@@ -295,7 +300,7 @@ fail:
   if (graph_guard_condition) {
     rmw_ret_t ret = rmw_destroy_guard_condition(graph_guard_condition);
     if (ret != RMW_RET_OK) {
-      fprintf(stderr, "failed to destroy guard condition: %s\n", rmw_get_error_string_safe());
+      fprintf(stderr, "failed to destroy guard condition: %s\n", rmw_get_error_string().str);
     }
   }
   if (node_info) {
@@ -386,7 +391,7 @@ rmw_destroy_node(rmw_node_t * node)
   if (node_info->graph_guard_condition) {
     rmw_ret_t ret = rmw_destroy_guard_condition(node_info->graph_guard_condition);
     if (ret != RMW_RET_OK) {
-      fprintf(stderr, "failed to destroy guard condition: %s\n", rmw_get_error_string_safe());
+      fprintf(stderr, "failed to destroy guard condition: %s\n", rmw_get_error_string().str);
     }
   }
 
