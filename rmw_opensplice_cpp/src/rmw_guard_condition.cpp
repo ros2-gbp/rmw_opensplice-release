@@ -12,7 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifdef __clang__
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wmismatched-tags"
+#endif
+#if defined(_MSC_VER)
+# pragma warning(push)
+# pragma warning(disable: 4099)
+#endif
 #include <ccpp_dds_dcps.h>
+#if defined(_MSC_VER)
+# pragma warning(pop)
+#endif
+#ifdef __clang__
+# pragma GCC diagnostic pop
+#endif
 #include <dds_dcps.h>
 
 #include "rmw/allocators.h"
@@ -27,8 +41,15 @@
 extern "C"
 {
 rmw_guard_condition_t *
-rmw_create_guard_condition()
+rmw_create_guard_condition(rmw_context_t * context)
 {
+  RCUTILS_CHECK_ARGUMENT_FOR_NULL(context, NULL);
+  RMW_CHECK_TYPE_IDENTIFIERS_MATCH(
+    init context,
+    context->implementation_identifier,
+    opensplice_cpp_identifier,
+    // TODO(wjwwood): replace this with RMW_RET_INCORRECT_RMW_IMPLEMENTATION when refactored
+    return NULL);
   rmw_guard_condition_t * guard_condition = rmw_guard_condition_allocate();
   if (!guard_condition) {
     RMW_SET_ERROR_MSG("failed to allocate guard condition");
