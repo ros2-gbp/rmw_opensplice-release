@@ -1,0 +1,12 @@
+Source: ros-dashing-rmw-opensplice-cpp
+Section: misc
+Priority: extra
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), libopensplice69, ros-dashing-ament-cmake, ros-dashing-ament-lint-auto, ros-dashing-ament-lint-common, ros-dashing-opensplice-cmake-module, ros-dashing-rcutils, ros-dashing-rmw, ros-dashing-rosidl-cmake, ros-dashing-rosidl-generator-c, ros-dashing-rosidl-generator-cpp, ros-dashing-rosidl-generator-dds-idl, ros-dashing-rosidl-typesupport-opensplice-c, ros-dashing-rosidl-typesupport-opensplice-cpp, ros-dashing-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-dashing-rmw-opensplice-cpp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libopensplice69, ros-dashing-ament-cmake, ros-dashing-opensplice-cmake-module, ros-dashing-rmw, ros-dashing-rosidl-cmake, ros-dashing-rosidl-generator-c, ros-dashing-rosidl-generator-cpp, ros-dashing-rosidl-typesupport-opensplice-c, ros-dashing-rosidl-typesupport-opensplice-cpp, ros-dashing-ros-workspace
+Description: Implement the ROS middleware interface using PrismTech OpenSplice static code generation in C++.
