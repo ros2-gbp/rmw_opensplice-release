@@ -56,6 +56,29 @@ using rosidl_typesupport_opensplice_cpp::process_topic_name;
 // The extern "C" here enforces that overloading is not used.
 extern "C"
 {
+rmw_ret_t
+rmw_init_subscription_allocation(
+  const rosidl_message_type_support_t * type_support,
+  const rosidl_message_bounds_t * message_bounds,
+  rmw_subscription_allocation_t * allocation)
+{
+  // Unused in current implementation.
+  (void) type_support;
+  (void) message_bounds;
+  (void) allocation;
+  RMW_SET_ERROR_MSG("unimplemented");
+  return RMW_RET_ERROR;
+}
+
+rmw_ret_t
+rmw_fini_subscription_allocation(rmw_subscription_allocation_t * allocation)
+{
+  // Unused in current implementation.
+  (void) allocation;
+  RMW_SET_ERROR_MSG("unimplemented");
+  return RMW_RET_ERROR;
+}
+
 rmw_subscription_t *
 rmw_create_subscription(
   const rmw_node_t * node,
@@ -103,7 +126,7 @@ rmw_create_subscription(
     RMW_SET_ERROR_MSG("callbacks handle is null");
     return NULL;
   }
-  std::string type_name = create_type_name(callbacks, "msg");
+  std::string type_name = create_type_name(callbacks);
 
   const char * error_string = callbacks->register_type(participant, type_name.c_str());
   if (error_string) {
