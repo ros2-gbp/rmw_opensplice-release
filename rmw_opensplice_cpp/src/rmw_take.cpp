@@ -74,7 +74,7 @@ take(
 
   const char * error_string = callbacks->take(
     topic_reader,
-    subscriber_info->ignore_local_publications,
+    subscription->options.ignore_local_publications,
     ros_message, taken, sending_publication_handle);
   // If no data was taken, that's not captured as an error here, but instead taken is set to false.
   if (error_string) {
@@ -236,7 +236,7 @@ take_serialized_message(
   return take_serialized_sample(
     subscriber_info,
     serialized_message,
-    subscriber_info->ignore_local_publications,
+    subscription->options.ignore_local_publications,
     taken,
     sending_publication_handle,
     allocation);
@@ -320,5 +320,52 @@ rmw_take_serialized_message_with_info(
   detail->publication_handle = sending_publication_handle;
 
   return RMW_RET_OK;
+}
+
+rmw_ret_t
+rmw_take_loaned_message(
+  const rmw_subscription_t * subscription,
+  void ** loaned_message,
+  bool * taken,
+  rmw_subscription_allocation_t * allocation)
+{
+  (void) subscription;
+  (void) loaned_message;
+  (void) taken;
+  (void) allocation;
+
+  RMW_SET_ERROR_MSG("rmw_take_loaned_message not implemented for rmw_opensplice_cpp");
+  return RMW_RET_UNSUPPORTED;
+}
+
+rmw_ret_t
+rmw_take_loaned_message_with_info(
+  const rmw_subscription_t * subscription,
+  void ** loaned_message,
+  bool * taken,
+  rmw_message_info_t * message_info,
+  rmw_subscription_allocation_t * allocation)
+{
+  (void) subscription;
+  (void) loaned_message;
+  (void) taken;
+  (void) message_info;
+  (void) allocation;
+
+  RMW_SET_ERROR_MSG("rmw_take_loaned_message_with_info not implemented for rmw_opensplice_cpp");
+  return RMW_RET_UNSUPPORTED;
+}
+
+rmw_ret_t
+rmw_return_loaned_message_from_subscription(
+  const rmw_subscription_t * subscription,
+  void * loaned_message)
+{
+  (void) subscription;
+  (void) loaned_message;
+
+  RMW_SET_ERROR_MSG(
+    "rmw_release_loaned_message_from_subscription not implemented for rmw_opensplice_cpp");
+  return RMW_RET_UNSUPPORTED;
 }
 }  // extern "C"
