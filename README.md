@@ -1,3 +1,26 @@
+## rmw_opensplice (eloquent) - 0.8.1-1
+
+The packages in the `rmw_opensplice` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --rosdistro eloquent rmw_opensplice` on `Thu, 24 Oct 2019 04:27:30 -0000`
+
+The `rmw_opensplice_cpp` package was released.
+
+Version of package(s) in repository `rmw_opensplice`:
+
+- upstream repository: https://github.com/ros2/rmw_opensplice.git
+- release repository: https://github.com/ros2-gbp/rmw_opensplice-release.git
+- rosdistro version: `0.8.0-1`
+- old version: `0.8.0-1`
+- new version: `0.8.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.0`
+- catkin_pkg version: `0.4.14`
+- rosdep version: `0.17.1`
+- rosdistro version: `0.7.5`
+- vcstools version: `0.1.42`
+
+
 ## rmw_opensplice (eloquent) - 0.8.0-1
 
 The packages in the `rmw_opensplice` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --track eloquent --rosdistro eloquent rmw_opensplice` on `Thu, 26 Sep 2019 12:27:34 -0000`
